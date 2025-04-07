@@ -1,9 +1,4 @@
-* freeCodeCamp article: https://www.freecodecamp.org/news/python-project-how-to-build-your-own-jarvis-using-python/
-
-* Hashnode articles:
-  * Part 1: https://ashutoshkrris.hashnode.dev/how-to-build-your-personal-ai-assistant-using-python
-  * Part 2: https://ashutoshkrris.hashnode.dev/how-to-implement-functionality-to-your-personal-ai-assistant-using-python
-
+Inspired by :  freeCodeCamp article: https://www.freecodecamp.org/news/python-project-how-to-build-your-own-jarvis-using-python/
 Demo Video: https://vimeo.com/650156113
 
 Contents of .env file:
