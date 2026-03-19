@@ -19,9 +19,9 @@ from jarvis_ui import launch_ui
 import json
 from urllib.request import urlopen
 
-USERNAME = config('USER')
-BOTNAME = config('BOTNAME')
-ELEVENLABS_API_KEY = "sk_94030f3a08a24a9d11ffe8b6d715063b71b62658fe0859c6"
+USERNAME = config('USER', default='Sir')
+BOTNAME = config('BOTNAME', default='Jarvis')
+ELEVENLABS_API_KEY = config('ELEVENLABS_API_KEY', default='')
 
 # Set ElevenLabs API key
 os.environ["ELEVEN_API_KEY"] = ELEVENLABS_API_KEY

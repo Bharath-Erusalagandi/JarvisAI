@@ -172,3 +172,7 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# App Credentials and Ephemeral Files
+credentials.json
+temp_audio.mp3
