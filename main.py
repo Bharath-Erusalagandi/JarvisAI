@@ -20,7 +20,7 @@ import json
 from urllib.request import urlopen
 
 USERNAME = config('USER', default='Sir')
-BOTNAME = config('BOTNAME', default='Jarvis')
+BOTNAME = config('BOTNAME', default='MAch')
 ELEVENLABS_API_KEY = config('ELEVENLABS_API_KEY', default='')
 
 # Set ElevenLabs API key
@@ -326,7 +326,7 @@ def assistant_thread():
     global running
     
     if comm_channel:
-        comm_channel.add_message("Starting Jarvis...", "status")
+        comm_channel.add_message("Starting MAch...", "status")
     
     greet_user()
     

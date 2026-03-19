@@ -117,7 +117,7 @@ class GlowingCircle(QWidget):
             int(text_radius * 2),
             int(text_radius * 2)
         )
-        painter.drawText(text_rect, Qt.AlignCenter, "JARVIS")
+        painter.drawText(text_rect, Qt.AlignCenter, "MAch")
         
     def get_opacity(self):
         return self._opacity
@@ -214,11 +214,12 @@ class ModernButton(QPushButton):
             self.shadow.setOffset(0, 4)
         super().mouseReleaseEvent(event)
 
-class JarvisUI(QMainWindow):
-    """Main UI class for Jarvis"""
+class MAchUI(QMainWindow):
+    """Main UI class for MAch"""
     
     def __init__(self, comm_channel):
         super().__init__()
+        self.MAch_logo = None # Late initialization
         self.comm_channel = comm_channel
         self.comm_channel.update_signal.connect(self.update_chat)
         self.comm_channel.status_signal.connect(self.update_status)
@@ -237,7 +238,7 @@ class JarvisUI(QMainWindow):
     def initUI(self):
         """Initialize the UI components"""
         # Set window properties
-        self.setWindowTitle('JARVIS - Voice Assistant')
+        self.setWindowTitle('MAch - Voice Assistant')
         self.setGeometry(100, 100, 1000, 700)
         self.setMinimumSize(800, 600)
         
@@ -284,9 +285,9 @@ class JarvisUI(QMainWindow):
         # Header with Jarvis logo/animation
         header_layout = QHBoxLayout()
         
-        # Create Jarvis circle logo
-        self.jarvis_logo = GlowingCircle()
-        header_layout.addWidget(self.jarvis_logo, 0, Qt.AlignLeft)
+        # Create MAch circle logo
+        self.MAch_logo = GlowingCircle()
+        header_layout.addWidget(self.MAch_logo, 0, Qt.AlignLeft)
         
         # Status indicator
         self.status_layout = QVBoxLayout()
@@ -298,7 +299,7 @@ class JarvisUI(QMainWindow):
         self.status_layout.addWidget(self.status_label)
         
         # Add wake word info
-        wake_word_label = QLabel("Say 'Hey Jarvis' or press Wake button")
+        wake_word_label = QLabel("Say 'Hey MAch' or press Wake button")
         wake_word_label.setFont(QFont("Montserrat", 12))
         wake_word_label.setStyleSheet("color: rgba(255, 255, 255, 0.7); margin-left: 15px;")
         self.status_layout.addWidget(wake_word_label)
@@ -355,13 +356,13 @@ class JarvisUI(QMainWindow):
         button_layout.setSpacing(15)
         
         # Wake button
-        self.wake_button = ModernButton("Wake Jarvis", "#007AFF", "#0056b3")
-        self.wake_button.clicked.connect(self.wake_jarvis)
+        self.wake_button = ModernButton("Wake MAch", "#007AFF", "#0056b3")
+        self.wake_button.clicked.connect(self.wake_MAch)
         button_layout.addWidget(self.wake_button)
         
         # Stop button
         self.stop_button = ModernButton("Stop Listening", "#E74C3C", "#c0392b")
-        self.stop_button.clicked.connect(self.stop_jarvis)
+        self.stop_button.clicked.connect(self.stop_MAch)
         button_layout.addWidget(self.stop_button)
         
         # Clear button
@@ -377,7 +378,7 @@ class JarvisUI(QMainWindow):
         main_layout.addLayout(button_layout)
         
         # Add welcome message
-        self.update_chat("Welcome to Jarvis Voice Assistant. Press 'Wake Jarvis' to begin.", "status")
+        self.update_chat("Welcome to MAch Voice Assistant. Press 'Wake MAch' to begin.", "status")
     
     def update_status(self, status):
         """Update the status label and animation"""
@@ -385,15 +386,15 @@ class JarvisUI(QMainWindow):
             self.status_label.setText("Status: Listening...")
             self.status_label.setStyleSheet("color: #2196F3; font-weight: bold; font-size: 16px; margin-left: 15px;")
             # Update logo animation
-            self.jarvis_logo.start_animations()
+            self.MAch_logo.start_animations()
         elif status == "processing":
             self.status_label.setText("Status: Processing...")
             self.status_label.setStyleSheet("color: #FFC107; font-weight: bold; font-size: 16px; margin-left: 15px;")
-            self.jarvis_logo.start_animations()
+            self.MAch_logo.start_animations()
         elif status == "speaking":
             self.status_label.setText("Status: Speaking...")
             self.status_label.setStyleSheet("color: #9C27B0; font-weight: bold; font-size: 16px; margin-left: 15px;")
-            self.jarvis_logo.start_animations()
+            self.MAch_logo.start_animations()
         elif status == "idle":
             self.status_label.setText("Status: Idle")
             self.status_label.setStyleSheet("color: #4CAF50; font-weight: bold; font-size: 16px; margin-left: 15px;")
@@ -408,7 +409,7 @@ class JarvisUI(QMainWindow):
         if msg_type == "user":
             self.chat_area.append(f'<p style="margin: 12px 0; line-height: 1.5;"><span style="color: #888888; font-size: 12px; font-family: Montserrat, sans-serif;">[{timestamp}]</span> <span style="color: #4CAF50; font-weight: bold; font-family: Montserrat, sans-serif;">You:</span> <span style="color: #FFFFFF; font-family: Montserrat, sans-serif;">{message}</span></p>')
         elif msg_type == "assistant":
-            self.chat_area.append(f'<p style="margin: 12px 0; line-height: 1.5;"><span style="color: #888888; font-size: 12px; font-family: Montserrat, sans-serif;">[{timestamp}]</span> <span style="color: #007AFF; font-weight: bold; font-family: Montserrat, sans-serif;">Jarvis:</span> <span style="color: #FFFFFF; font-family: Montserrat, sans-serif;">{message}</span></p>')
+            self.chat_area.append(f'<p style="margin: 12px 0; line-height: 1.5;"><span style="color: #888888; font-size: 12px; font-family: Montserrat, sans-serif;">[{timestamp}]</span> <span style="color: #007AFF; font-weight: bold; font-family: Montserrat, sans-serif;">MAch:</span> <span style="color: #FFFFFF; font-family: Montserrat, sans-serif;">{message}</span></p>')
         elif msg_type == "status":
             self.chat_area.append(f'<p style="margin: 12px 0; line-height: 1.5; color: rgba(255, 255, 255, 0.7); font-style: italic; font-size: 14px; font-family: Montserrat, sans-serif;"><span style="color: #888888; font-size: 12px;">[{timestamp}]</span> {message}</p>')
         elif msg_type == "error":
@@ -417,13 +418,13 @@ class JarvisUI(QMainWindow):
         # Scroll to the bottom
         self.chat_area.verticalScrollBar().setValue(self.chat_area.verticalScrollBar().maximum())
     
-    def wake_jarvis(self):
-        """Wake up Jarvis manually"""
+    def wake_MAch(self):
+        """Wake up MAch manually"""
         self.update_status("listening")
-        self.comm_channel.add_message("Jarvis activated manually", "status")
+        self.comm_channel.add_message("MAch activated manually", "status")
     
-    def stop_jarvis(self):
-        """Stop Jarvis from listening"""
+    def stop_MAch(self):
+        """Stop MAch from listening"""
         self.update_status("idle")
         self.comm_channel.add_message("Stopped listening", "status")
     
@@ -434,14 +435,14 @@ class JarvisUI(QMainWindow):
     
     def close_application(self):
         """Close the application"""
-        self.comm_channel.add_message("Shutting down Jarvis...", "status")
+        self.comm_channel.add_message("Shutting down MAch...", "status")
         QTimer.singleShot(1000, self.close)
 
 def launch_ui():
-    """Launch the Jarvis UI"""
+    """Launch the MAch UI"""
     app = QApplication(sys.argv)
     comm_channel = CommunicationChannel()
-    window = JarvisUI(comm_channel)
+    window = MAchUI(comm_channel)
     window.show()
     return app, window, comm_channel
 
